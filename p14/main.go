@@ -1,10 +1,11 @@
 package main
 
 import "fmt"
+import "../common"
 
 func chainLength(n int, cache map[int]int) int {
     chain := []int{}
-    for !contains(chain, n) {
+    for !common.Contains(chain, n) {
         val, cached := cache[n]
         if cached {
             return len(chain) + val
@@ -20,15 +21,6 @@ func chainLength(n int, cache map[int]int) int {
         }
     }
     return len(chain)
-}
-
-func contains(ns []int, n int) bool {
-    for _, v := range ns {
-        if n == v {
-            return true
-        }
-    }
-    return false
 }
 
 func main() {

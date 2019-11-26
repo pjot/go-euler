@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import "math"
+import "../common"
 
 func triangles() <-chan int {
 	out := make(chan int)
@@ -16,23 +16,9 @@ func triangles() <-chan int {
 	return out
 }
 
-func divisors(n int) []int {
-    limit := int(math.Sqrt(float64(n)))
-    divs := []int{}
-    for i := 1; i < limit + 1; i++ {
-        if n % i == 0 {
-            divs = append(divs, i)
-            if n /i != i {
-                divs = append(divs, n/i)
-            }
-        }
-    }
-    return divs
-}
-
 func main() {
     for n := range triangles() {
-        if len(divisors(n)) > 500 {
+        if len(common.Divisors(n)) > 500 {
             fmt.Println("found", n)
             break
         }
