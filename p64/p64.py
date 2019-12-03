@@ -6,7 +6,8 @@ def continued_fraction(s):
     m = 0
     d = 1
     a = int(math.floor(math.sqrt(s)))
-    for i in range(40):
+    limit = int(math.log(s) * math.sqrt(s)) + 4
+    for i in range(limit):
         m = d * a - m
         d = (s - m * m) / d
         if d == 0:
@@ -18,15 +19,20 @@ def continued_fraction(s):
 def find_period(s):
     p = 1
     while p <= (len(s) / 2):
-        print p
+        period = True
+        for i in range(p):
+            if s[i] != s[i + p]:
+                period = False
+        if period:
+            return p
         p += 1
+    return 0
 
-expansion = continued_fraction(7)
-print expansion
-find_period(expansion)
-
-'''
-for i in range(2, 14):
+odd_periods = 0
+for i in range(2, 10001):
     expansion = continued_fraction(i)
-    print i, expansion
-'''
+    period = find_period(expansion)
+    if period > 0 and period % 2 == 1:
+        odd_periods += 1
+
+print 'odd periods', odd_periods
