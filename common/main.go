@@ -60,6 +60,15 @@ func Contains(ns []int, n int) bool {
     return false
 }
 
+func Index(ns []string, n string) int {
+    for k, v := range ns {
+        if n == v {
+            return k
+        }
+    }
+    return -1
+}
+
 func Sum(ns []int) int {
 	s := 0
 	for _, n := range ns {
